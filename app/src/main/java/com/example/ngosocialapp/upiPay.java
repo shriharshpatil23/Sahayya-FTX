@@ -25,7 +25,7 @@ public class upiPay extends AppCompatActivity {
         TextInputEditText upiid=findViewById(R.id.UPInum);
         Intent j=getIntent();
         String str=j.getStringExtra("ngoname");
-        Button upibtn=findViewById(R.id.UPIPay);
+        Button upibtn=findViewById(R.id.razorBtn);
         String user,ngo;
         ngo=str;
         fAuth= FirebaseAuth.getInstance();
