@@ -52,6 +52,17 @@ public class CreateEvent extends AppCompatActivity {
 
                 finish();
                 startActivity(new Intent(getApplicationContext(),ngoEventDetails.class));
+
+                //Notification Details
+                String notification_title = "New Event added by "+engoname ;
+                String notification_body = "Event Name : "+ename+"\n"+ "Date :" +edate;
+
+
+                //Notification sender
+                FcmNotificationsSender notificationsender = new FcmNotificationsSender("/topics/all",
+                        notification_title,notification_body,getApplicationContext(),CreateEvent.this );
+
+                notificationsender.SendNotifications();
             }
         });
 
