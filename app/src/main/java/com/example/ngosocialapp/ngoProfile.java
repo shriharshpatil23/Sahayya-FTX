@@ -49,7 +49,7 @@ public class ngoProfile extends Fragment {
     ImageView profile_image;
     EditText email_id, full_name_profile, phone_no, website, account_no, ifsc, editintsa, editaddresss, editsector, editdiscription;
     TextView fullname_field, username_field, donation_amount, no_of_donation;
-    Button donate;
+    Button donate , eventsbyngo;
     DatabaseReference userref;
 
 
@@ -64,6 +64,7 @@ public class ngoProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         placeholder = inflater.inflate(R.layout.ngoprofile_fragment, container, false);
+
 
         String username ="Shri";
         Bundle bundle = this.getArguments();
@@ -86,101 +87,7 @@ public class ngoProfile extends Fragment {
             }
         });
 
-//
-//        userref = FirebaseDatabase.getInstance().getReference().child("NGO").child(userId);
-//        fullname_field = placeholder.findViewById(R.id.fullname_field);
-////            fullname_field.setText();
-//        username_field = placeholder.findViewById((R.id.username_field));
-////            username_field.setText();
-//        donation_amount = placeholder.findViewById(R.id.donation_amount);
-//        no_of_donation = placeholder.findViewById(R.id.no_of_donation);
-//        email_id = placeholder.findViewById(R.id.editTextTextEmailAddress);
-//        full_name_profile = placeholder.findViewById(R.id.editTextTextPersonName);
-//        phone_no = placeholder.findViewById(R.id.editTextPhone);
-//        website = placeholder.findViewById(R.id.website);
-//        account_no = placeholder.findViewById(R.id.editText_account_no);
-//        ifsc = placeholder.findViewById(R.id.editTextifsc);
-//        donate = (Button) placeholder.findViewById(R.id.donate);
-//
-//
-//        editintsa = placeholder.findViewById(R.id.editinstagram);
-//        editaddresss = placeholder.findViewById(R.id.editadress);
-//        editsector = placeholder.findViewById(R.id.editsector);
-//        editdiscription = placeholder.findViewById(R.id.editdescription);
-//
-//
-//        userref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                NGO curr_ngo = snapshot.getValue(NGO.class);
-//                fullname_field.setText(curr_ngo.getName());
-//                String since = "since " + curr_ngo.getYear();
-//                username_field.setText(since);
-//                email_id.setText(curr_ngo.getEmail());
-//                full_name_profile.setText(curr_ngo.getName());
-//                phone_no.setText(curr_ngo.getPhone());
-//                website.setText(curr_ngo.getWebsite());
-//                account_no.setText(curr_ngo.getAccountNum());
-//                ifsc.setText(curr_ngo.getIFSC());
-//                editintsa.setText(curr_ngo.getInsta());
-//                editaddresss.setText(curr_ngo.getAddress());
-//                editsector.setText(curr_ngo.getSector());
-//                editdiscription.setText(curr_ngo.getDesc());
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//            }
-//        });
-//
-//        donate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                // piyush cha kaaam
-//            }
-//        });
-//
-//
-//
-//        feed_recyclerView = placeholder.findViewById(R.id.ngo_feed);
-//        postDatabase = FirebaseDatabase.getInstance().getReference("Posts").child(userId);
-//        feed_list = new ArrayList<>();
-//        postDatabase.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange (@NonNull DataSnapshot snapshot){
-//                feed_list.clear();
-//                for (DataSnapshot it : snapshot.getChildren()) {
-//                    Post p=it.getValue(Post.class);
-//                    feed_list.add(p);
-//                }
-//
-//                adapter = new FeedPostAdapter(mContext,feed_list);
-//
-//                feed_recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-//                feed_recyclerView.setAdapter(adapter);
-//
-////              adapter.notifyDataSetChanged();
-//
-//            }
-//
-//            @Override
-//            public void onCancelled (@NonNull DatabaseError error){
-//
-//            }
-//
-//        });
 
-
-//
-//        donateBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // change fragment to donate button
-//                // main part of app where API will be used.
-//
-//            }
-//        });
 
         return placeholder;
     }
@@ -202,7 +109,16 @@ public class ngoProfile extends Fragment {
         account_no = placeholder.findViewById(R.id.editText_account_no);
         ifsc = placeholder.findViewById(R.id.editTextifsc);
         donate = (Button) placeholder.findViewById(R.id.donate);
+        eventsbyngo = placeholder.findViewById(R.id.events_by_ngo);
 
+        eventsbyngo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,EventsByNGO.class);
+                intent.putExtra("userID",userId);
+                startActivity(intent);
+            }
+        });
 
         editintsa = placeholder.findViewById(R.id.editinstagram);
         editaddresss = placeholder.findViewById(R.id.editadress);

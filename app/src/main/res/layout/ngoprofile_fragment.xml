@@ -316,6 +316,17 @@
                 android:backgroundTint="@color/dark_blue"
                 app:rippleColor="@color/ripple_effect"/>
 
+
+            <Button
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:id="@+id/events_by_ngo"
+                android:text="Events by NGO"
+                android:backgroundTint="@color/dark_blue"
+                app:rippleColor="@color/ripple_effect"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ngo_feed"
                 android:layout_width="match_parent"
