@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.protobuf.StringValue;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
@@ -21,6 +24,7 @@ public class razorpay extends AppCompatActivity implements PaymentResultListener
     private Button payBtn;
     private TextInputEditText amount;
     private NGO curNgo;
+    private DatabaseReference databaseUsers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,7 @@ public class razorpay extends AppCompatActivity implements PaymentResultListener
         amount=findViewById(R.id.razorpayamount);
         Intent i=getIntent();
         curNgo=(NGO) i.getSerializableExtra("ngoObj");
+        databaseUsers= FirebaseDatabase.getInstance().getReference("transaction");
         payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +74,16 @@ public class razorpay extends AppCompatActivity implements PaymentResultListener
         Toast.makeText(getApplicationContext(), "successfull !\nTx ID - " + s, Toast.LENGTH_LONG).show();
 //        Intent i =new Intent(LoanRepaymentActivity.this,MainActivity.class);
 //        startActivity(i);
-        Snackbar.make(findViewById(android.R.id.content), "Payment Successful", Snackbar.LENGTH_LONG).show();
+
+        String user= FirebaseAuth.getInstance().getUid();
+        String ngo=curNgo.getName();
+        transaction tra=new transaction(user,ngo,amount.getText().toString());
+        databaseUsers.child(user).push().setValue(tra);
+        databaseUsers.child(ngo).push().setValue(tra);
+        Intent j=new Intent(getApplicationContext(),splashAfterTran.class);
+        startActivity(j);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
     }
 
     @Override
