@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.razorpay.PaymentResultListener;
+
 import java.io.Serializable;
 
-public class DonerPayment extends AppCompatActivity {
+public class DonerPayment extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class DonerPayment extends AppCompatActivity {
                 finish();
             }
         });
-    }
 
+    }
 
 }

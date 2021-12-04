@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ngosocialapp.AdapterClasses.FeedPostAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -238,10 +239,24 @@ public class ngoProfile extends Fragment {
             public void onClick(View v) {
 
                 // piyush cha kaaam
+                userref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        NGO curr_ngo = snapshot.getValue(NGO.class);
+                        Intent i=new Intent(getActivity(),razorpay.class);
+                        i.putExtra("ngoObj", (Serializable) curr_ngo);
+                        startActivity(i);
+                    }
 
-                Intent i=new Intent(getActivity(),DonerPayment.class);
-                i.putExtra("ngoname",full_name_profile.getText().toString());
-                startActivity(i);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error)
+                    {
+                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
             }
         });
 

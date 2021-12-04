@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NgoSocialApp">
         <activity
+            android:name=".razorpay"
+            android:exported="true" />
+        <activity
             android:name=".showEventDetails"
             android:exported="true" />
         <activity
